@@ -1,6 +1,7 @@
 import Cube from '../modules/cube'
 
 const cube = new Cube()
+const container = document.getElementById('cube_container')
 
 /**
  * Change 1st infected cube
@@ -10,18 +11,20 @@ const changeStartCube = () => {
     cube.infectCube(cube.xInput.value, cube.yInput.value, cube.zInput.value)
 }
 
-// Instanciate Cube and init 3D scene
-cube.renderer.setSize(window.innerWidth, window.innerHeight)
-document.getElementById('cube_container').appendChild(cube.renderer.domElement)
-
-// Handle window resize
-window.addEventListener('resize', () => {
-    const width = window.innerWidth
+const sizeScene = () => {
+    const rect = container.getBoundingClientRect();
+    const width = rect.width
     const height = window.innerHeight
     cube.renderer.setSize(width, height)
     cube.camera.aspect = width / height
     cube.camera.updateProjectionMatrix()
-})
+}
+
+// Instanciate Cube and init 3D scene
+sizeScene()
+container.appendChild(cube.renderer.domElement)
+// Handle window resize
+window.addEventListener('resize', sizeScene)
 
 // Attach HTML inputs
 cube.setHtmlInputs(
