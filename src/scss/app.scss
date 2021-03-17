@@ -1,1 +1,6 @@
 @import "~bootstrap/scss/bootstrap";
+@import "loader";
+
+#cube_container {
+  min-height: 95vh;
+}

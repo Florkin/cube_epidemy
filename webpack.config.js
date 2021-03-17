@@ -115,3 +115,4 @@ module.exports = {
     ].concat(htmlPluginEntries),
     target: 'web',
 };
+

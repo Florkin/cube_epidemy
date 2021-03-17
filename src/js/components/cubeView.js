@@ -1,6 +1,7 @@
 import Cube from '../modules/cube'
 
 const cube = new Cube()
+const loader = document.getElementById('loader')
 const container = document.getElementById('cube_container')
 
 /**
@@ -8,6 +9,7 @@ const container = document.getElementById('cube_container')
  */
 const changeStartCube = () => {
     cube.reInitCubesColor()
+    cube.infectedCubes = []
     cube.infectCube(cube.xInput.value, cube.yInput.value, cube.zInput.value)
 }
 
@@ -21,8 +23,12 @@ const sizeScene = () => {
 }
 
 // Instanciate Cube and init 3D scene
-sizeScene()
-container.appendChild(cube.renderer.domElement)
+window.onload = () => {
+    loader.style.display = 'none'
+    sizeScene()
+    container.appendChild(cube.renderer.domElement)
+}
+
 // Handle window resize
 window.addEventListener('resize', sizeScene)
 

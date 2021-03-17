@@ -12,6 +12,8 @@ function Cube() {
   this.size = 3
 
   this.cubes = []
+  this.healthyCubes = []
+  this.infectedCubes = []
 
   this.scene = new THREE.Scene()
 
@@ -86,6 +88,7 @@ function Cube() {
     line.position.z = posZ
     cube.name = posX + ',' + posY + ',' + posZ
     this.cubes.push(cube.name)
+    this.healthyCubes = this.cubes
     this.scene.add(cube)
     this.scene.add(line)
   }
@@ -138,6 +141,7 @@ function Cube() {
 
   this.infectCube = (x, y, z) => {
     const name = this.convertCoords([x, y, z])
+    this.infectedCubes.push(name)
     this.scene
       .getObjectByName(name)
       .material.color.set(this.colors.infectedColor)
