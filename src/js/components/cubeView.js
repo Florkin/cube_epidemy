@@ -10,7 +10,7 @@ const container = document.getElementById('cube_container')
 const changeStartCube = () => {
     cube.reInitCubesColor()
     cube.infectedCubes = []
-    cube.infectCube(cube.xInput.value, cube.yInput.value, cube.zInput.value)
+    cube.infectCube(cube.convertCoords([cube.xInput.value, cube.yInput.value, cube.zInput.value]))
 }
 
 const sizeScene = () => {
@@ -44,7 +44,7 @@ cube.setHtmlInputs(
 cube.display()
 
 // Set first infected cube
-cube.infectCube(cube.xInput.value, cube.yInput.value, cube.zInput.value)
+cube.infectCube(cube.convertCoords([cube.xInput.value, cube.yInput.value, cube.zInput.value]))
 
 // And change it when coordinates inputs changes
 cube.xInput.addEventListener('change', changeStartCube)
@@ -54,5 +54,23 @@ cube.zInput.addEventListener('change', changeStartCube)
 // Handle cube size change
 cube.sizeInput.addEventListener('change', () => {
     cube.updateSize(cube.sizeInput.value)
-    cube.infectCube(cube.xInput.value, cube.yInput.value, cube.zInput.value)
+    cube.infectCube(cube.convertCoords([cube.xInput.value, cube.yInput.value, cube.zInput.value]))
 })
+
+
+// Epidemy
+
+const infectionStep = () => {
+    cube.infectedCubes.forEach((infected) => {
+        const neighbors = cube.getNeighbors(infected)
+        neighbors.forEach((elem) => {
+            cube.infectCube(elem)
+        })
+    })
+}
+
+const startEpidemy = () => {
+    infectionStep()
+}
+
+document.getElementById('start_epidemy_btn').addEventListener('click', startEpidemy)
