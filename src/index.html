@@ -7,7 +7,7 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 col-lg-6 col-xl-8">
+        <div class="col-12 col-lg-6 col-xl-8 px-0">
             <div id="cube_container"></div>
             <div id="loader">
                 <div class="loader-container">
@@ -78,7 +78,7 @@
                     </div>
                     <small class="text-muted">
                         <i class="fa fa-arrow-right"></i>
-                        Vous pouvez aussi double cliquer sur un cube pour le selectionner.
+                        Vous pouvez aussi double cliquer sur un cube pour le sélectionner.
                     </small>
                 </div>
 
@@ -88,6 +88,45 @@
                         Start Epidemy
                     </a>
                 </div>
+            </div>
+
+            <div id="epidemy" class="d-none">
+                <div class="section-header">
+                    <h2>L'épidémie a commencé !</h2>
+                    <p><i class="fa fa-arrow-right"></i>&nbsp;Vous pouvez a tout moment infecter manuellement un cube en
+                        double-cliquant dessus.</p>
+                </div>
+                <div id="diary" class="diary-section">
+                    <div id="diary-entry-1" class="diary-entry">
+                        <h3>Jour <span class="day">1</span></h3>
+                        <hr>
+                        <div class="diary-row">
+                            <div>Cubes infectés</div>
+                            <div class="separator"></div>
+                            <div><span class="infected_number">1</span> / <span class="total_number"></span></div>
+                        </div>
+                        <div class="diary-row">
+                            <div>Pourcentage</div>
+                            <div class="separator"></div>
+                            <div><span class="percentage">10</span> %</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <div id="epidemy_step_btn" class="btn btn-outline-success btn-lg">
+                        Jour suivant
+                        <i class="fa fa-arrow-right"></i>
+                    </div>
+                    <div class="d-none" id="end-alert">
+                        <div class="alert alert-success">
+                            Tous les cubes sont infectés
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-outline-warning">
+                    Reset
+                </button>
             </div>
         </div>
     </div>

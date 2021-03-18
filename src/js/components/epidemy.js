@@ -3,6 +3,9 @@ import Cube from '../modules/cube'
 const cube = new Cube()
 const loader = document.getElementById('loader')
 const container = document.getElementById('cube_container')
+const startEpidemyBtn = document.getElementById('start_epidemy_btn')
+const epidemyStepBtn = document.getElementById('epidemy_step_btn')
+let day = 1
 
 /**
  * Change 1st infected cube
@@ -69,20 +72,73 @@ cube.inputs.cubeSize.addEventListener('change', () => {
 
 
 // Epidemy
+const toggleSection = (elem) => {
+    if (elem.classList.contains('d-none')) {
+        elem.classList.remove('d-none')
+    } else {
+        elem.classList.add('d-none')
+    }
+}
 
-const infectionStep = () => {
-    cube.infectedCubes.forEach((infected) => {
-        const neighbors = cube.getNeighbors(infected)
-        neighbors.forEach((elem) => {
-            cube.infectCube(elem)
-        })
+const showDay = (entry) => {
+    const elem = entry.querySelector('.day')
+    elem.innerHTML = day
+}
+
+const showInfectedNumber = (entry) => {
+    const elem = entry.querySelector('.infected_number')
+    elem.innerHTML = cube.getInfectedNumber().toString()
+}
+
+const showTotal = (entry) => {
+    const elem = entry.querySelector('.total_number')
+    elem.innerHTML = cube.getTotalNumber().toString()
+}
+
+const showPercentage = (entry) => {
+    const elem = entry.querySelector('.percentage')
+    elem.innerHTML = cube.getPercentage().toString()
+}
+
+const addDiaryEntry = () => {
+    const template = document.getElementById('diary-entry-1').cloneNode(true)
+    day += 1
+    template.id = 'diary-entry-' + day
+    showDay(template)
+    showInfectedNumber(template)
+    showTotal(template)
+    showPercentage(template)
+    const diarySection = document.getElementById('diary')
+    diarySection.appendChild(template)
+    diarySection.scroll({
+        top: diarySection.offsetHeight
     })
 }
 
 const startEpidemy = () => {
     cube.epidemyStarted = true;
-    infectionStep()
+    const configSection = document.getElementById('config')
+    const epidemySection = document.getElementById('epidemy')
+    const diaryEntry = document.getElementById('diary-entry-1')
+    toggleSection(configSection);
+    toggleSection(epidemySection);
+    showTotal(diaryEntry)
+    showPercentage(diaryEntry)
 }
 
-document.getElementById('start_epidemy_btn').addEventListener('click', startEpidemy)
+const endEpidemy = () => {
+    epidemyStepBtn.classList.add('d-none')
+    document.getElementById('end-alert').classList.remove('d-none')
+}
+
+const infectionStep = () => {
+    cube.infectionStep()
+    addDiaryEntry()
+    if (cube.getInfectedNumber() == cube.getTotalNumber()) {
+        return endEpidemy()
+    }
+}
+
+startEpidemyBtn.addEventListener('click', startEpidemy)
+epidemyStepBtn.addEventListener('click', infectionStep)
 
