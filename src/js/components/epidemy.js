@@ -5,6 +5,7 @@ const loader = document.getElementById('loader')
 const container = document.getElementById('cube_container')
 const startEpidemyBtn = document.getElementById('start_epidemy_btn')
 const epidemyStepBtn = document.getElementById('epidemy_step_btn')
+const autoEpidemyBtn = document.getElementById('auto_epidemy_btn')
 const configSection = document.getElementById('config')
 const epidemySection = document.getElementById('epidemy')
 let day = 1
@@ -128,16 +129,29 @@ const startEpidemy = () => {
 
 const endEpidemy = () => {
     epidemyStepBtn.classList.add('d-none')
+    autoEpidemyBtn.classList.add('d-none')
     document.getElementById('end-alert').classList.remove('d-none')
 }
 
 const infectionStep = () => {
-    cube.infectionStep()
-    addDiaryEntry()
     if (cube.getInfectedNumber() == cube.getTotalNumber()) {
         return endEpidemy()
     }
+    cube.infectionStep()
+    addDiaryEntry()
+}
+
+const autoEpidemy = () => {
+    autoEpidemyBtn.classList.add('d-none')
+    epidemyStepBtn.classList.add('d-none')
+    const interval = setInterval(() => {
+        if (cube.getInfectedNumber() == cube.getTotalNumber()) {
+            clearInterval(interval)
+        }
+        infectionStep()
+    }, 200)
 }
 
 startEpidemyBtn.addEventListener('click', startEpidemy)
 epidemyStepBtn.addEventListener('click', infectionStep)
+autoEpidemyBtn.addEventListener('click', autoEpidemy)
