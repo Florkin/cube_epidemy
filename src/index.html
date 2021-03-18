@@ -8,8 +8,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-12 col-lg-6 col-xl-8">
-            <div id="cube_container">
-            </div>
+            <div id="cube_container"></div>
             <div id="loader">
                 <div class="loader-container">
                     <div class="lds-ripple">
@@ -19,10 +18,14 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-lg-6 col-xl-4 d-flex flex-column justify-content-center border-start">
+        <div class="col-12 col-lg-6 col-xl-4 d-flex flex-column justify-content-center px-4">
             <div id="config">
                 <div class="config-section">
-                    <h2 class="section-title">Configurez le cube</h2>
+                    <h2 class="section-title">
+                        <i class="fa fa-cogs"></i>
+                        Configuration
+                    </h2>
+                    <hr>
                     <div class="form-group my-1">
                         <label for="cube_size" class="form-label">Taille du cube</label>
                         <input class="form-range" id="cube_size" name="size" type="range" step="2" value="3"
@@ -36,7 +39,9 @@
                     <div class="form-group my-1">
                         <input type="color" id="infected_color" name="infected_color"
                                value="#a80000">
-                        <label for="infected_color">Couleur des cubes infectée</label>
+                        <label for="infected_color">
+                            Couleur des cubes infectée
+                        </label>
 
                     </div>
                     <div class="form-group my-1">
@@ -46,7 +51,11 @@
                     </div>
                 </div>
                 <div id="select_first" class="config-section">
-                    <h2 class="section-title">Choisissez le premier infecté</h2>
+                    <h2 class="section-title">
+                        <i class="fa fa-virus"></i>
+                        Choisissez le premier infecté
+                    </h2>
+                    <hr>
                     <div class="row g-3">
                         <div class="col-4">
                             <div class="form-group custom-number-input">
@@ -67,11 +76,17 @@
                             </div>
                         </div>
                     </div>
-                    <small class="text-muted">Vous pouvez aussi double cliquer sur un cube pour le selectionner.</small>
+                    <small class="text-muted">
+                        <i class="fa fa-arrow-right"></i>
+                        Vous pouvez aussi double cliquer sur un cube pour le selectionner.
+                    </small>
                 </div>
 
                 <div class="text-center mt-4">
-                    <a href="#" id="start_epidemy_btn" class="btn btn-success btn-lg">Start Epidemy</a>
+                    <a href="#" id="start_epidemy_btn" class="btn btn-success btn-lg">
+                        <i class="fa fa-viruses"></i>
+                        Start Epidemy
+                    </a>
                 </div>
             </div>
         </div>

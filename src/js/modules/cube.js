@@ -10,7 +10,7 @@ function Cube() {
         healthyColor: new THREE.Color('#F0E7D8'),
         lineColor: new THREE.Color('#000000'),
         infectedColor: new THREE.Color('#61210F'),
-        white: new THREE.Color('#ffffff'),
+        white: new THREE.Color('#f8f8f8'),
     }
 
     this.epidemyStarted = false
