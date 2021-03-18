@@ -4,3 +4,9 @@
 #cube_container {
   min-height: 95vh;
 }
+
+.config-section {
+  padding: 20px 0;
+
+  @extend .border-bottom
+}

@@ -19,35 +19,47 @@
             </div>
         </div>
         <div class="col-12 col-lg-6 col-xl-4 d-flex flex-column justify-content-center border-start">
-            <form action="">
-                <div class="form-group">
-                    <label for="cube_size">Size of cube</label>
-                    <input class="form-control-range" id="cube_size" name="size" type="range" step="2" value="3" min="3"
-                           max="11">
-                </div>
-                <div class="row g-3">
-                    <div class="col-4">
-                        <div class="form-group custom-number-input">
-                            <label style="color: red" for="pos_x">Axe X</label>
-                            <input class="form-control cube-select" id="pos_x" name="x" type="number" value="0">
-                        </div>
+            <div id="config">
+                <div class="config-section">
+                    <h2 class="section-title">Configurez le cube</h2>
+                    <div class="form-group">
+                        <label for="cube_size" class="form-label">Taille du cube</label>
+                        <input class="form-range" id="cube_size" name="size" type="range" step="2" value="3"
+                               min="3"
+                               max="11">
                     </div>
-                    <div class="col-4">
-                        <div class="form-group custom-number-input">
-                            <label style="color: green" for="pos_y">Axe Y</label>
-                            <input class="form-control cube-select" id="pos_y" name="y" type="number" value="0">
-                        </div>
-                    </div>
-                    <div class="col-4">
-                        <div class="form-group custom-number-input">
-                            <label style="color: blue" for="pos_z">Axe Z</label>
-                            <input class="form-control cube-select" id="pos_z" name="z" type="number" value="0">
-                        </div>
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" name="show_axes" id="show_axes">
+                        <label class="form-check-label" for="show_axes">Montrer les axes</label>
                     </div>
                 </div>
-            </form>
-            <div class="text-center mt-4">
-                <a href="#" id="start_epidemy_btn" class="btn btn-success btn-lg">Start Epidemy</a>
+                <div id="select_first" class="config-section">
+                    <h2 class="section-title">Choisissez le premier cube infecté</h2>
+                    <div class="row g-3">
+                        <div class="col-4">
+                            <div class="form-group custom-number-input">
+                                <label style="color: red" for="pos_x">Axe X</label>
+                                <input class="form-control cube-select" id="pos_x" name="x" type="number" value="0">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group custom-number-input">
+                                <label style="color: green" for="pos_y">Axe Y</label>
+                                <input class="form-control cube-select" id="pos_y" name="y" type="number" value="0">
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="form-group custom-number-input">
+                                <label style="color: blue" for="pos_z">Axe Z</label>
+                                <input class="form-control cube-select" id="pos_z" name="z" type="number" value="0">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-4">
+                    <a href="#" id="start_epidemy_btn" class="btn btn-success btn-lg">Start Epidemy</a>
+                </div>
             </div>
         </div>
     </div>

@@ -35,6 +35,7 @@ window.addEventListener('resize', sizeScene)
 // Attach HTML inputs
 cube.setHtmlInputs(
     document.getElementById('cube_size'),
+    document.getElementById('show_axes'),
     document.getElementById('pos_x'),
     document.getElementById('pos_y'),
     document.getElementById('pos_z')
@@ -46,10 +47,11 @@ cube.display()
 // Set first infected cube
 cube.infectCube(cube.convertCoords([cube.xInput.value, cube.yInput.value, cube.zInput.value]))
 
-// And change it when coordinates inputs changes
+// Inputs event listeners
 cube.xInput.addEventListener('change', changeStartCube)
 cube.yInput.addEventListener('change', changeStartCube)
 cube.zInput.addEventListener('change', changeStartCube)
+cube.axesInput.addEventListener('change', cube.renderAxes)
 
 // Handle cube size change
 cube.sizeInput.addEventListener('change', () => {
