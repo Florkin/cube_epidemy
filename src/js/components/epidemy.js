@@ -5,6 +5,8 @@ const loader = document.getElementById('loader')
 const container = document.getElementById('cube_container')
 const startEpidemyBtn = document.getElementById('start_epidemy_btn')
 const epidemyStepBtn = document.getElementById('epidemy_step_btn')
+const configSection = document.getElementById('config')
+const epidemySection = document.getElementById('epidemy')
 let day = 1
 
 /**
@@ -111,14 +113,12 @@ const addDiaryEntry = () => {
     const diarySection = document.getElementById('diary')
     diarySection.appendChild(template)
     diarySection.scroll({
-        top: diarySection.offsetHeight
+        top: 10000000
     })
 }
 
 const startEpidemy = () => {
     cube.epidemyStarted = true;
-    const configSection = document.getElementById('config')
-    const epidemySection = document.getElementById('epidemy')
     const diaryEntry = document.getElementById('diary-entry-1')
     toggleSection(configSection);
     toggleSection(epidemySection);
@@ -141,4 +141,3 @@ const infectionStep = () => {
 
 startEpidemyBtn.addEventListener('click', startEpidemy)
 epidemyStepBtn.addEventListener('click', infectionStep)
-
