@@ -15,14 +15,10 @@ function Cube() {
     }
 
     this.epidemyStarted = false
-
     this.size = 3
-
     this.cubes = []
     this.infectedCubes = []
-
     this.scene = new THREE.Scene()
-
     this.renderer = new THREE.WebGLRenderer({
         antialias: true,
     })
