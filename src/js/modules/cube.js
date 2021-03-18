@@ -2,9 +2,11 @@ import * as THREE from 'three'
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
 import {Interaction} from 'three.interaction';
 
+const camelCase = require('camelcase');
+
 function Cube() {
     this.colors = {
-        baseColor: new THREE.Color('#F0E7D8'),
+        healthyColor: new THREE.Color('#F0E7D8'),
         lineColor: new THREE.Color('#000000'),
         infectedColor: new THREE.Color('#61210F'),
         white: new THREE.Color('#ffffff'),
@@ -31,31 +33,42 @@ function Cube() {
     this.controls = new OrbitControls(this.camera, this.renderer.domElement)
     this.interaction = new Interaction(this.renderer, this.scene, this.camera);
 
-    this.setHtmlInputs = (size, axes, x, y, z) => {
-        this.sizeInput = size
-        this.axesInput = axes
-        this.xInput = x
-        this.yInput = y
-        this.zInput = z
+    this.setHtmlInputs = (...inputs) => {
+        this.inputs = []
+        inputs.forEach((input) => {
+            this.inputs[camelCase(input.id)] = input
+        })
+    }
+
+    this.updateColors = () => {
+        this.colors.healthyColor = new THREE.Color(this.inputs.healthyColor.value)
+        this.colors.infectedColor = new THREE.Color(this.inputs.infectedColor.value)
+        const cube = this
+        this.cubes.forEach((elem) => {
+            cube.scene.getObjectByName(elem).material.color.set(this.colors.healthyColor)
+        })
+        this.infectedCubes.forEach((elem) => {
+            cube.scene.getObjectByName(elem).material.color.set(this.colors.infectedColor)
+        })
     }
 
     this.setPositionInputs = () => {
         const offset = this.size % 2 === 0 ? 1 : 0
         const min = -Math.floor(this.size / 2) + offset
         const max = Math.floor(this.size / 2)
-        this.xInput.value = 0
-        this.yInput.value = 0
-        this.zInput.value = 0
-        this.xInput.setAttribute('min', min)
-        this.xInput.setAttribute('max', max)
-        this.yInput.setAttribute('min', min)
-        this.yInput.setAttribute('max', max)
-        this.zInput.setAttribute('min', min)
-        this.zInput.setAttribute('max', max)
+        this.inputs.posX.value = 0
+        this.inputs.posY.value = 0
+        this.inputs.posZ.value = 0
+        this.inputs.posX.setAttribute('min', min)
+        this.inputs.posX.setAttribute('max', max)
+        this.inputs.posY.setAttribute('min', min)
+        this.inputs.posY.setAttribute('max', max)
+        this.inputs.posZ.setAttribute('min', min)
+        this.inputs.posZ.setAttribute('max', max)
     }
 
     this.renderAxes = () => {
-        if (this.axesInput.checked) {
+        if (this.inputs.showAxes.checked) {
             const axesHelper = new THREE.AxesHelper(this.size)
             axesHelper.name = 'axe_helper'
             this.scene.add(axesHelper)
@@ -78,7 +91,7 @@ function Cube() {
         const geometry = new THREE.BoxGeometry(0.6, 0.6, 0.6)
         const edges = new THREE.EdgesGeometry(geometry)
         const cubeMaterial = new THREE.MeshLambertMaterial({
-            color: this.colors.baseColor,
+            color: this.colors.healthyColor,
             wireframe: false,
         })
         const lineMaterial = new THREE.LineBasicMaterial({
@@ -95,13 +108,8 @@ function Cube() {
         line.position.z = posZ
         cube.name = posX + ',' + posY + ',' + posZ
         this.cubes.push(cube.name)
-        this.healthyCubes = this.cubes
         this.scene.add(cube)
         this.scene.add(line)
-        cube.cursor = 'pointer';
-        cube.on('click', function () {
-            alert("ni")
-        });
     }
 
     this.initCube = () => {
@@ -139,8 +147,16 @@ function Cube() {
     this.reInitCubesColor = () => {
         const cube = this
         this.cubes.forEach((elem) => {
-            cube.scene.getObjectByName(elem).material.color.set(cube.colors.baseColor)
+            cube.scene.getObjectByName(elem).material.color.set(cube.colors.healthyColor)
         })
+    }
+
+    this.getInputsCoords = () => {
+        return this.convertCoords([
+            this.inputs.posX.value,
+            this.inputs.posY.value,
+            this.inputs.posZ.value
+        ])
     }
 
     this.convertCoords = (elem) => {
@@ -177,6 +193,7 @@ function Cube() {
     }
 
     this.display = () => {
+        this.updateColors()
         this.setPositionInputs()
         this.camera.position.z = this.size * 1.5
         this.addLight()

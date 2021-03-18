@@ -10,7 +10,7 @@ const container = document.getElementById('cube_container')
 const changeStartCube = () => {
     cube.reInitCubesColor()
     cube.infectedCubes = []
-    cube.infectCube(cube.convertCoords([cube.xInput.value, cube.yInput.value, cube.zInput.value]))
+    cube.infectCube(cube.getInputsCoords())
 }
 
 const sizeScene = () => {
@@ -33,9 +33,16 @@ window.onload = () => {
 window.addEventListener('resize', sizeScene)
 
 // Attach HTML inputs
+/*
+    Naming inputs ID's is important here.
+    The cube.inputs object attribute is generated like that:
+    => document.getElementById('cube_size') will add cube.inputs.cubeSize = input
+*/
 cube.setHtmlInputs(
     document.getElementById('cube_size'),
     document.getElementById('show_axes'),
+    document.getElementById('healthy_color'),
+    document.getElementById('infected_color'),
     document.getElementById('pos_x'),
     document.getElementById('pos_y'),
     document.getElementById('pos_z')
@@ -45,18 +52,20 @@ cube.setHtmlInputs(
 cube.display()
 
 // Set first infected cube
-cube.infectCube(cube.convertCoords([cube.xInput.value, cube.yInput.value, cube.zInput.value]))
+cube.infectCube(cube.getInputsCoords())
 
 // Inputs event listeners
-cube.xInput.addEventListener('change', changeStartCube)
-cube.yInput.addEventListener('change', changeStartCube)
-cube.zInput.addEventListener('change', changeStartCube)
-cube.axesInput.addEventListener('change', cube.renderAxes)
+cube.inputs.posX.addEventListener('change', changeStartCube)
+cube.inputs.posY.addEventListener('change', changeStartCube)
+cube.inputs.posZ.addEventListener('change', changeStartCube)
+cube.inputs.showAxes.addEventListener('change', cube.renderAxes)
+cube.inputs.healthyColor.addEventListener('change', cube.updateColors)
+cube.inputs.infectedColor.addEventListener('change', cube.updateColors)
 
 // Handle cube size change
-cube.sizeInput.addEventListener('change', () => {
-    cube.updateSize(cube.sizeInput.value)
-    cube.infectCube(cube.convertCoords([cube.xInput.value, cube.yInput.value, cube.zInput.value]))
+cube.inputs.cubeSize.addEventListener('change', () => {
+    cube.updateSize(cube.inputs.cubeSize.value)
+    cube.infectCube(cube.getInputsCoords())
 })
 
 
