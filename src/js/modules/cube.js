@@ -1,6 +1,7 @@
 import * as THREE from 'three'
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
-import {Interaction} from 'three.interaction';
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
 
 const camelCase = require('camelcase');
 
@@ -11,6 +12,8 @@ function Cube() {
         infectedColor: new THREE.Color('#61210F'),
         white: new THREE.Color('#ffffff'),
     }
+
+    this.epidemyStarted = false
 
     this.size = 3
 
@@ -31,7 +34,6 @@ function Cube() {
     )
 
     this.controls = new OrbitControls(this.camera, this.renderer.domElement)
-    this.interaction = new Interaction(this.renderer, this.scene, this.camera);
 
     this.setHtmlInputs = (...inputs) => {
         this.inputs = []
@@ -108,11 +110,12 @@ function Cube() {
         line.position.z = posZ
         cube.name = posX + ',' + posY + ',' + posZ
         this.cubes.push(cube.name)
-        this.scene.add(cube)
         this.scene.add(line)
+        this.group.add(cube)
     }
 
     this.initCube = () => {
+        this.group = new THREE.Group();
         const offset = this.size % 2 === 0 ? 1 : 0
         const floor = Math.floor(this.size / 2)
         let x
@@ -125,6 +128,7 @@ function Cube() {
                 }
             }
         }
+        this.scene.add(this.group)
     }
 
     this.clearCube = () => {
@@ -144,8 +148,9 @@ function Cube() {
         this.render()
     }
 
-    this.reInitCubesColor = () => {
+    this.healAllCubes = () => {
         const cube = this
+        this.infectedCubes = []
         this.cubes.forEach((elem) => {
             cube.scene.getObjectByName(elem).material.color.set(cube.colors.healthyColor)
         })
@@ -192,7 +197,27 @@ function Cube() {
         return neighbors;
     }
 
+   this.cubeSelectClickEvent = (e) => {
+        mouse.x = ( e.clientX / this.renderer.domElement.clientWidth ) * 2 - 1;
+        mouse.y = - ( e.clientY / this.renderer.domElement.clientHeight ) * 2 + 1;
+        raycaster.setFromCamera( mouse, this.camera );
+
+        var intersects = raycaster.intersectObject( this.group, true );
+        if ( intersects.length > 0 ) {
+            let object = intersects[0].object;
+            if (!this.epidemyStarted) {
+                this.healAllCubes()
+            }
+            this.infectCube(object.name)
+            const coords = this.convertCoords(object.name)
+            this.inputs.posX.value = coords[0]
+            this.inputs.posY.value = coords[1]
+            this.inputs.posZ.value = coords[2]
+        }
+    }
+
     this.display = () => {
+        this.renderer.domElement.addEventListener( 'dblclick', this.cubeSelectClickEvent );
         this.updateColors()
         this.setPositionInputs()
         this.camera.position.z = this.size * 1.5
@@ -203,6 +228,7 @@ function Cube() {
     }
 
     this.updateSize = (size) => {
+        this.epidemyStarted = false
         this.infectedCubes = []
         this.controls.reset()
         this.size = size

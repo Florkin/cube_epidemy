@@ -8,8 +8,7 @@ const container = document.getElementById('cube_container')
  * Change 1st infected cube
  */
 const changeStartCube = () => {
-    cube.reInitCubesColor()
-    cube.infectedCubes = []
+    cube.healAllCubes()
     cube.infectCube(cube.getInputsCoords())
 }
 
@@ -81,7 +80,9 @@ const infectionStep = () => {
 }
 
 const startEpidemy = () => {
+    cube.epidemyStarted = true;
     infectionStep()
 }
 
 document.getElementById('start_epidemy_btn').addEventListener('click', startEpidemy)
+
