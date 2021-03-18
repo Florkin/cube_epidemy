@@ -7,7 +7,7 @@
 <body>
 <div class="container-fluid">
     <div class="row">
-        <div class="col-12 col-lg-6 col-xl-8 px-0">
+        <div class="col-12 col-lg-6 col-xl-8 px-0 position-relative">
             <div id="cube_container"></div>
             <div id="loader">
                 <div class="loader-container">
@@ -18,7 +18,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-12 col-lg-6 col-xl-4 d-flex flex-column justify-content-center px-4">
+        <div class="col-12 col-lg-6 col-xl-4 d-flex flex-column justify-content-center px-4 position-relative">
             <div id="config">
                 <div class="config-section">
                     <h2 class="section-title">
@@ -105,7 +105,8 @@
                         <div class="diary-row">
                             <div>Cubes infectés</div>
                             <div class="separator"></div>
-                            <div><span class="infected_number text-primary">1</span> / <span class="total_number"></span></div>
+                            <div><span class="infected_number text-primary">1</span> / <span
+                                    class="total_number"></span></div>
                         </div>
                         <div class="diary-row">
                             <div>Pourcentage</div>
@@ -130,12 +131,19 @@
                         </div>
                     </div>
                 </div>
-                <div class="text-end">
-                    <a href="/" id="reset_btn" class="btn btn-outline-warning">
+                <div class="text-center mt-3">
+                    <a href="/" id="reset_btn" class="btn btn-outline-danger">
                         Reset
                     </a>
                 </div>
             </div>
+            <footer>
+                <div class="container text-end">
+                    <a href="https://github.com/Florkin/cube_epidemy" class="nav-link">
+                        <i class="fab fa-github"></i> Voir le projet sur Github
+                    </a>
+                </div>
+            </footer>
         </div>
     </div>
 </div>
