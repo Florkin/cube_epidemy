@@ -1,5 +1,6 @@
 import * as THREE from 'three'
 import {OrbitControls} from 'three/examples/jsm/controls/OrbitControls'
+import { Interaction } from 'three.interaction';
 
 function Cube() {
     this.colors = {
@@ -28,6 +29,7 @@ function Cube() {
     )
 
     this.controls = new OrbitControls(this.camera, this.renderer.domElement)
+    this.interaction = new Interaction(this.renderer, this.scene, this.camera);
 
     this.setHtmlInputs = (sizeInput, xInput, yInput, zInput) => {
         this.sizeInput = sizeInput
@@ -90,6 +92,10 @@ function Cube() {
         this.healthyCubes = this.cubes
         this.scene.add(cube)
         this.scene.add(line)
+        cube.cursor = 'pointer';
+        cube.on('click', function() {
+            alert("ni")
+        });
     }
 
     this.initCube = () => {

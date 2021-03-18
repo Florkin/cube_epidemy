@@ -1,6 +1,4 @@
-import '../scss/app.scss';
-import 'jquery'
-import 'popper.js'
+import '../scss/app.scss'
 import 'bootstrap'
-import './components/cubeView'
+import './components/epidemy'
 
