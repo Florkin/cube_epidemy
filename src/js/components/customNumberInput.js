@@ -7,8 +7,10 @@ const setEvents = (btn, input, elem) => {
     btn.addEventListener('click', (e) => {
         if (btn.getAttribute('data-target') === '+') {
             input.value = parseInt(input.value) + 1
+            checkMinMax('+', btn, input)
         } else {
             input.value = parseInt(input.value) - 1
+            checkMinMax('-', btn, input)
         }
         input.dispatchEvent(event)
     })
@@ -22,6 +24,18 @@ const setButton = (elem, input, value) => {
     elem.appendChild(btn)
 
     setEvents(btn, input, elem)
+}
+
+const checkMinMax = (target, btn, input) => {
+    if (target === '+') {
+        if (parseInt(input.value) === parseInt(input.getAttribute('max'))) {
+            btn.classList.add('disabled')
+        }
+    } else {
+        if (parseInt(input.value) === parseInt(input.getAttribute('min'))) {
+            btn.classList.add('disabled')
+        }
+    }
 }
 
 const inputs = document.querySelectorAll('.custom-number-input')

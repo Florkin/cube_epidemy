@@ -1,3 +1,11 @@
 .btn {
   text-transform: uppercase;
 }
+
+.custom-number-btn {
+  @extend .btn;
+  @extend .btn-primary;
+  @extend .btn-sm;
+
+  margin: 0 5px;
+}
