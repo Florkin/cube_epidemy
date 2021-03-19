@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Cube epidemy 3D simulator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--
     A l'attention des commanditaires de ce test :
     Je sais que vous aimez mettre des petits messages cachés parlant de technologies a la mode dans le <head>...
@@ -90,7 +91,7 @@
                             </div>
                         </div>
                     </div>
-                    <small class="text-muted">
+                    <small class="text-muted d-none d-lg-inline">
                         <i class="fa fa-arrow-right"></i>
                         Vous pouvez aussi double cliquer sur un cube pour le sélectionner.
                     </small>
@@ -105,9 +106,9 @@
             </div>
 
             <div id="epidemy" class="d-none">
-                <div class="section-header">
+                <div class="section-header mt-4 mt-lg-0">
                     <h2>L'épidémie a commencé !</h2>
-                    <p><i class="fa fa-arrow-right"></i>&nbsp;Vous pouvez a tout moment infecter manuellement un cube en
+                    <p><i class="fa fa-arrow-right d-none d-lg-inline"></i>&nbsp;Vous pouvez a tout moment infecter manuellement un cube en
                         double-cliquant dessus.</p>
                 </div>
                 <div id="diary" class="diary-section">
@@ -129,11 +130,11 @@
                 </div>
 
                 <div class="text-center mt-4">
-                    <div id="epidemy_step_btn" class="btn btn-outline-success btn-lg mx-1">
+                    <div id="epidemy_step_btn" class="btn btn-outline-success btn-lg m-1">
                         Jour suivant
                         <i class="fa fa-arrow-right"></i>
                     </div>
-                    <div id="auto_epidemy_btn" class="btn btn-primary btn-lg mx-1">
+                    <div id="auto_epidemy_btn" class="btn btn-primary btn-lg m-1">
                         Automatique
                         <i class="fa fa-robot"></i>
                     </div>

@@ -21,7 +21,7 @@ const changeStartCube = () => {
 const sizeScene = () => {
     const rect = container.getBoundingClientRect();
     const width = rect.width
-    const height = window.innerHeight
+    const height = window.innerWidth >= 992 ? window.innerHeight : window.innerHeight / 2
     cube.renderer.setSize(width, height)
     cube.camera.aspect = width / height
     cube.camera.updateProjectionMatrix()

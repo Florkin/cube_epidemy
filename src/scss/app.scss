@@ -2,9 +2,12 @@
 @import "~bootstrap/scss/bootstrap";
 @import "bootstrap-overrides";
 @import "loader";
+@import "custom-number-inputs";
 
 #cube_container {
-  min-height: 95vh;
+  @include media-breakpoint-up(lg) {
+    min-height: 95vh;
+  }
 }
 
 .config-section {
@@ -52,8 +55,12 @@
 }
 
 footer {
-  position: absolute;
-  bottom: 10px;
-  right: 10px;
+  @include media-breakpoint-up(lg) {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+  }
+
+  margin-top: 50px;
 }
 
