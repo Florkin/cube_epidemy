@@ -238,7 +238,7 @@ function Cube() {
         mouse.y = -(e.clientY / this.renderer.domElement.clientHeight) * 2 + 1;
         raycaster.setFromCamera(mouse, this.camera);
 
-        var intersects = raycaster.intersectObject(this.group, true);
+        let intersects = raycaster.intersectObject(this.group, true);
         if (intersects.length > 0) {
             let object = intersects[0].object;
             if (!this.epidemyStarted) {
@@ -247,11 +247,13 @@ function Cube() {
             this.infectCube(object.name)
             const coords = this.convertCoords(object.name)
             this.inputs.posX.value = coords[0]
-            this.inputs.posX.dispatchEvent(inputChangeEvent)
             this.inputs.posY.value = coords[1]
-            this.inputs.posY.dispatchEvent(inputChangeEvent)
             this.inputs.posZ.value = coords[2]
-            this.inputs.posZ.dispatchEvent(inputChangeEvent)
+            if (!this.epidemyStarted) {
+                this.inputs.posX.dispatchEvent(inputChangeEvent)
+                this.inputs.posY.dispatchEvent(inputChangeEvent)
+                this.inputs.posZ.dispatchEvent(inputChangeEvent)
+            }
         }
     }
 
