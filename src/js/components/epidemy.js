@@ -43,6 +43,7 @@ window.addEventListener('resize', sizeScene)
     The cube.inputs object attribute is generated like that:
     => document.getElementById('cube_size') will add cube.inputs.cubeSize = input
 */
+// TODO Too much repeat, Refactor this
 cube.setHtmlInputs(
     document.getElementById('cube_size'),
     document.getElementById('show_axes'),
@@ -59,7 +60,9 @@ cube.display()
 // Set first infected cube
 cube.infectCube(cube.getInputsCoords())
 
+
 // Inputs event listeners
+// TODO Too much repeat, Refactor this
 cube.inputs.posX.addEventListener('change', changeStartCube)
 cube.inputs.posY.addEventListener('change', changeStartCube)
 cube.inputs.posZ.addEventListener('change', changeStartCube)

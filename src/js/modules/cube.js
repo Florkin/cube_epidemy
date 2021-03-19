@@ -32,6 +32,17 @@ function Cube() {
 
     this.controls = new OrbitControls(this.camera, this.renderer.domElement)
 
+    /**
+     * Sets a list of html inputs for configuration
+     * the inputs id's becomes the key in the array
+     * ex: <input id="cube_size"> -> inputs.cubeSize = document.getElementById('cube_size')
+     * Required inputs :
+     * - id = 'cube_size'
+     * - id = 'posX', id = 'posY', id = 'posZ'
+     * - id = 'infected_color', id = 'healthy_color'
+     * - id = 'show_axes'
+     * @param inputs
+     */
     this.setHtmlInputs = (...inputs) => {
         this.inputs = []
         inputs.forEach((input) => {
@@ -51,6 +62,7 @@ function Cube() {
         })
     }
 
+    // TODO Refactor this method
     this.setPositionInputs = () => {
         const offset = this.size % 2 === 0 ? 1 : 0
         const min = -Math.floor(this.size / 2) + offset
@@ -85,6 +97,7 @@ function Cube() {
         this.scene.add(light2)
     }
 
+    // TODO Refactor this method
     this.addCube = (posX, posY, posZ) => {
         // Cube constants
         const geometry = new THREE.BoxGeometry(0.6, 0.6, 0.6)
@@ -201,6 +214,7 @@ function Cube() {
         }
     }
 
+    // TODO Refactor this method
     this.getNeighbors = (infected) => {
         const coords = this.convertCoords(infected)
         let neighbors = []
