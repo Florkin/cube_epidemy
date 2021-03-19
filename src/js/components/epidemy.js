@@ -9,6 +9,7 @@ const autoEpidemyBtn = document.getElementById('auto_epidemy_btn')
 const configSection = document.getElementById('config')
 const epidemySection = document.getElementById('epidemy')
 let day = 1
+const reInitCubeEvent = new Event('reInitCube')
 
 /**
  * Change 1st infected cube
@@ -73,6 +74,7 @@ cube.inputs.infectedColor.addEventListener('change', cube.updateColors)
 // Handle cube size change
 cube.inputs.cubeSize.addEventListener('change', () => {
     cube.updateSize(cube.inputs.cubeSize.value)
+    document.dispatchEvent(reInitCubeEvent);
     cube.infectCube(cube.getInputsCoords())
 })
 

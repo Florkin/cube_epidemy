@@ -2,16 +2,16 @@ const setEvents = (btn, input, elem) => {
     const event = new Event('change');
     input.addEventListener('change', () => {
         elem.querySelector('.custom-number-show').innerHTML = input.value
+        checkMinMax(elem, btn, input)
     })
 
     btn.addEventListener('click', (e) => {
         if (btn.getAttribute('data-target') === '+') {
             input.value = parseInt(input.value) + 1
-            checkMinMax('+', btn, input)
         } else {
             input.value = parseInt(input.value) - 1
-            checkMinMax('-', btn, input)
         }
+        checkMinMax(elem, btn, input)
         input.dispatchEvent(event)
     })
 }
@@ -26,8 +26,11 @@ const setButton = (elem, input, value) => {
     setEvents(btn, input, elem)
 }
 
-const checkMinMax = (target, btn, input) => {
-    if (target === '+') {
+const checkMinMax = (elem, btn, input) => {
+    elem.querySelectorAll('.custom-number-btn').forEach((btn) => {
+        btn.classList.remove('disabled')
+    })
+    if (btn.getAttribute('data-target') === '+') {
         if (parseInt(input.value) === parseInt(input.getAttribute('max'))) {
             btn.classList.add('disabled')
         }
@@ -38,18 +41,33 @@ const checkMinMax = (target, btn, input) => {
     }
 }
 
-const inputs = document.querySelectorAll('.custom-number-input')
-inputs.forEach((elem) => {
-    const input = elem.querySelector('input')
-    input.style.display = 'none'
+const initCustomInputs = () => {
+    const inputs = document.querySelectorAll('.custom-number-input')
+    inputs.forEach((elem) => {
+        const input = elem.querySelector('input')
+        input.style.display = 'none'
 
-    setButton(elem, input, '-')
+        setButton(elem, input, '-')
 
-    const showNumber = document.createElement('span')
-    showNumber.classList.add('custom-number-show')
-    showNumber.appendChild(document.createTextNode(input.value))
-    elem.appendChild(showNumber)
+        const showNumber = document.createElement('span')
+        showNumber.classList.add('custom-number-show')
+        showNumber.appendChild(document.createTextNode(input.value))
+        elem.appendChild(showNumber)
 
-    setButton(elem, input, '+')
+        setButton(elem, input, '+')
 
-})
+    })
+}
+
+const clearCustomInputs = () => {
+    document.querySelectorAll('.custom-number-show').forEach((elem) => {
+        elem.innerHTML= '0';
+    })
+    document.querySelectorAll('.custom-number-btn').forEach((elem) => {
+        elem.classList.remove('disabled');
+    })
+
+}
+
+initCustomInputs()
+document.addEventListener('reInitCube', clearCustomInputs)

@@ -231,7 +231,9 @@ function Cube() {
         return neighbors;
     }
 
+    // TODO Optimize this method
     this.cubeSelectClickEvent = (e) => {
+        const inputChangeEvent = new Event('change');
         mouse.x = (e.clientX / this.renderer.domElement.clientWidth) * 2 - 1;
         mouse.y = -(e.clientY / this.renderer.domElement.clientHeight) * 2 + 1;
         raycaster.setFromCamera(mouse, this.camera);
@@ -245,8 +247,11 @@ function Cube() {
             this.infectCube(object.name)
             const coords = this.convertCoords(object.name)
             this.inputs.posX.value = coords[0]
+            this.inputs.posX.dispatchEvent(inputChangeEvent)
             this.inputs.posY.value = coords[1]
+            this.inputs.posY.dispatchEvent(inputChangeEvent)
             this.inputs.posZ.value = coords[2]
+            this.inputs.posZ.dispatchEvent(inputChangeEvent)
         }
     }
 
