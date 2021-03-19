@@ -11,7 +11,6 @@ const setEvents = (btn, input, elem) => {
         } else {
             input.value = parseInt(input.value) - 1
         }
-        checkMinMax(elem, btn, input)
         input.dispatchEvent(event)
     })
 }
@@ -27,16 +26,17 @@ const setButton = (elem, input, value) => {
 }
 
 const checkMinMax = (elem, btn, input) => {
-    elem.querySelectorAll('.custom-number-btn').forEach((btn) => {
-        btn.classList.remove('disabled')
-    })
     if (btn.getAttribute('data-target') === '+') {
         if (parseInt(input.value) === parseInt(input.getAttribute('max'))) {
             btn.classList.add('disabled')
+        } else {
+            btn.classList.remove('disabled')
         }
-    } else {
+    } else if (btn.getAttribute('data-target') === '-'){
         if (parseInt(input.value) === parseInt(input.getAttribute('min'))) {
             btn.classList.add('disabled')
+        } else {
+            btn.classList.remove('disabled')
         }
     }
 }
