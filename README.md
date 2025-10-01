@@ -5,6 +5,5 @@ Simulation of an epidemic in a cube
 
 ## Installation
 - Clone Repository
-- Run `npm install` then `npm run build` (other scripts are available, see package.json)
-- Open dist/index.html
+- Run `npm install` then `npm run dev` (other scripts are available, see package.json)
 - Enjoy !
